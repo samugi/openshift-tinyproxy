@@ -1,0 +1,25 @@
+apiVersion: v1
+kind: Template
+metadata:
+  name: "tinyproxy"
+message: "tinyproxy"
+objects:
+
+- apiVersion: v1
+  kind: BuildConfig
+  metadata:
+    name: tinyproxy
+  spec:
+    output:
+      to:
+        kind: "DockerImage"
+        name: "image-registry.openshift-image-registry.svc:5000/tinyproxy:example"
+    source:
+      git:
+        uri: https://github.com/samugi/openshift-tinyproxy.git
+      type: "Dockerfile"
+    strategy:
+      type: Docker
+      dockerStrategy:
+        dockerfilePath: openshift/Dockerfile
+
